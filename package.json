@@ -1,0 +1,23 @@
+{
+    "name": "hwaly-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/App.js",
+    "scripts": {
+        "test": "mocha --require @babel/register -w"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hwaly/hwaly-app.git"
+    },
+    "keywords": [],
+    "author": "Byeonghwa.Yeon <hwalybell@gmail.com> (https://github.com/hwaly/)",
+    "license": "BSD",
+    "homepage": "https://github.com/hwaly/hwaly-app#readme",
+    "devDependencies": {
+        "@babel/core": "^7.1.5",
+        "@babel/preset-env": "^7.1.5",
+        "@babel/register": "^7.0.0",
+        "mocha": "^5.2.0"
+    }
+}

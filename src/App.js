@@ -96,6 +96,10 @@ const App = (() => {
         }
 
         _getAppId() {
+            if (this._appId) {
+                return this._appId;
+            }
+
             let appId = '';
 
             if (this._idAttribute === 'data') {
