@@ -87,6 +87,8 @@ const App = (() => {
 
         findId(type) {
             this._setIdAttribute(type);
+
+            return this;
         }
 
         _setIdAttribute(type = 'id') {
