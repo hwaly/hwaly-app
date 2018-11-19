@@ -10,7 +10,8 @@
 
 ### usePrefix
 - 기본값 true
-- 
+- true: 첫번째 - 또는 _로 이루어진 단어 삭제
+- false: 가공 없이 그대로 활용
 ```javascript
 &lt;body id="app-test-sample">
 
@@ -22,8 +23,33 @@ app.usePrefix(false);
 ```
 
 
+### auto
+- 페이지와 관련없이 항상 실행되는 메서드
+- 배열 또는 스트링 나열
+```javascript
+app.auto('common', 'util');
+app.auto(['common', 'util']);
+```
+
+### add
+- 메서드 추가
+```javascript
+app.add({test, testA, testB, testC, testTest});
+app.add({site, siteTest, siteTestTest});
+```
 
 
+### readyAndRun
+- 'DOMContentLoaded' 이벤트 사용
+- callback 사용 가능
+```javascript
+app.readyAndRun(() => {
+    console.log('callback');
+});
+```
+
+
+### 사용법
 ```javascript
 import App from 'hwaly-app';
 

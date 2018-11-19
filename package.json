@@ -1,7 +1,7 @@
 {
     "name": "hwaly-app",
     "version": "1.0.0",
-    "description": "",
+    "description": "페이지의 해당 자바스크립트 자동 실행",
     "main": "src/App.js",
     "scripts": {
         "test": "mocha --require @babel/register"
@@ -11,7 +11,7 @@
         "url": "git+https://github.com/hwaly/hwaly-app.git"
     },
     "keywords": [],
-    "author": "Byeonghwa.Yeon <hwalybell@gmail.com> (https://github.com/hwaly/)",
+    "author": "연병화 (https://github.com/hwaly/)",
     "license": "BSD",
     "homepage": "https://github.com/hwaly/hwaly-app#readme",
     "devDependencies": {
