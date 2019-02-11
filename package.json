@@ -1,11 +1,8 @@
 {
     "name": "hwaly-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "페이지의 해당 자바스크립트 자동 실행",
     "main": "src/App.js",
-    "scripts": {
-        "test": "mocha --require @babel/register"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/hwaly/hwaly-app.git"
@@ -15,10 +12,10 @@
     "license": "BSD",
     "homepage": "https://github.com/hwaly/hwaly-app#readme",
     "devDependencies": {
-        "@babel/core": "^7.1.5",
-        "@babel/preset-env": "^7.1.5",
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
         "@babel/register": "^7.0.0",
-        "babel-loader": "^8.0.4",
+        "babel-loader": "^8.0.5",
         "mocha": "^5.2.0"
     }
 }
