@@ -1,0 +1,61 @@
+// line clamp
+//
+// @param @required {map} $args ($line-height: _, $size: _, $is-fixed: _)
+// @param {String, cssValue} $line-height - 기본, 20px
+// @param {Number} $size - 기본, 2줄
+// @param {Boolean} $is-fixed (false - 기본, max-height 설정 | true - height 설정)
+// @example
+//     selector {
+//         @include line-clamp($line-height: 20px, $size: 2, $is-fixed: false);
+//     }
+
+@mixin line-clamp($args...) {
+    $args: keywords($args);
+
+    $line-height: 20px;
+    $size: 2;
+    $is-fixed: false;
+
+    @if map-has-key($args, 'line-height') {
+        $line-height: map-get($args, 'line-height');
+    }
+
+    @if map-has-key($args, 'size') {
+        $size: map-get($args, 'size');
+    }
+
+    @if map-has-key($args, 'is-fixed') {
+        $is-fixed: map-get($args, 'is-fixed');
+    }
+
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+    position: relative;
+    @if $is-fixed {
+        height: ($line-height * $line-size);
+    } @else {
+        max-height: ($line-height * $size);
+    }
+    line-height: $line-height;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $size;
+    -webkit-box-orient: vertical;
+
+    &:after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 25%;
+        height: $line-height;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 75%);
+        text-align: right;
+        content: '...';
+    }
+
+    @supports (-webkit-line-clamp: 1) {
+        &:after {
+            display: none !important;
+        }
+    }
+}

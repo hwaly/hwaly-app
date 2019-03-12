@@ -1,0 +1,118 @@
+// @font-face
+//
+// @param @required {Map} $args ($name: _, $path: _, $weight: _, $style: _, $exts: _, $display: _, $rendering: _, $locals: _)
+// @param @required {String} $name 이름
+// @param @required {String} $path 경로
+// @param @required {Number, cssValue} $weight font-weight (100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900)
+// @param {String, cssValue} $style font-style (normal | italic)
+// @param {String | List} $exts (eot, woff2, woff, otf, ttf, svg)
+// @param {String, cssValue} $display font-display (auto | block | swap | fallback | optional)
+// @param {String, cssValue} $rendering text-rendering (auto | optimizeSpeed | optimizeLegibility | geometricPrecision)
+// @param {String | List} $locals 폰트명
+// @example
+//     @include font-face(
+//         $name: sample,
+//         $path: "/assets/fonts/sample-regular",
+//         $weight: 400,
+//         $style: normal,
+//         $exts: (eot, woff2, woff, otf, ttf, svg),
+//         $display: swap,
+//         $rendering: optimizeLegibility,
+//         $locals: (sample-regular, sampleRegular)
+//     );
+
+@function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@mixin font-face($args...) {
+    $args: keywords($args);
+
+    $name: null;
+    $path: null;
+    $weight: 400;
+    $style: normal;
+    $exts: (eot, woff2, woff);
+    $display: swap;
+    $rendering: optimizeLegibility;
+    $locals: null;
+
+    @if map-has-key($args, 'name') {
+        $name: map-get($args, 'name');
+    }
+    @if map-has-key($args, 'path') {
+        $path: map-get($args, 'path');
+    }
+    @if map-has-key($args, 'weight') {
+        $weight: map-get($args, 'weight');
+    }
+    @if map-has-key($args, 'style') {
+        $style: map-get($args, 'style');
+    }
+    @if map-has-key($args, 'exts') {
+        $exts: map-get($args, 'exts');
+    }
+    @if map-has-key($args, 'display') {
+        $display: map-get($args, 'display');
+    }
+    @if map-has-key($args, 'rendering') {
+        $rendering: map-get($args, 'rendering');
+    }
+    @if map-has-key($args, 'locals') {
+        $locals: map-get($args, 'locals');
+    }
+
+    @if $name == null or $path == null {
+        @error "필수값 확인 필요";
+    }
+
+    $src: null;
+    $srcLocal: null;
+    $srcEot: null;
+
+    $extmods: (
+        eot: "?#iefix",
+        svg: "#" + str-replace($name, " ", "_")
+    );
+
+    $formats: (
+        eot: "embedded-opentype",
+        otf: "opentype",
+        ttf: "truetype"
+    );
+
+    @if $locals {
+        @each $local in $locals {
+            $srcLocal: append($srcLocal, local(quote($local)), comma);
+        }
+    }
+
+    @each $ext in $exts {
+        $srcEot: if($ext == eot, url(quote($path + ".eot")), $srcEot);
+
+        $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+    }
+
+    @font-face {
+        font-family: quote($name);
+        font-style: $style;
+        font-weight: $weight;
+        font-display: $display;
+        @if $srcLocal {
+            src: $srcLocal;
+        }
+        @if $srcEot {
+            src: $srcEot;
+        }
+        src: $src;
+        text-rendering: $rendering;
+    }
+}

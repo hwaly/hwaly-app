@@ -13,7 +13,7 @@
 - true: 첫번째 - 또는 _로 이루어진 단어 삭제
 - false: 가공 없이 그대로 활용
 ```javascript
-&lt;body id="app-test-sample">
+<body id="app-test-sample">
 
 app.usePrefix(true);
 - test, testSample 실행

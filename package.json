@@ -7,6 +7,9 @@
         "type": "git",
         "url": "git+https://github.com/hwaly/hwaly-app.git"
     },
+    "scripts": {
+        "test": "mocha"
+    },
     "keywords": [],
     "author": "연병화 (https://github.com/hwaly/)",
     "license": "BSD",
@@ -16,6 +19,7 @@
         "@babel/preset-env": "^7.3.1",
         "@babel/register": "^7.0.0",
         "babel-loader": "^8.0.5",
-        "mocha": "^5.2.0"
+        "mocha": "^5.2.0",
+        "node-sass": "^4.11.0"
     }
 }
